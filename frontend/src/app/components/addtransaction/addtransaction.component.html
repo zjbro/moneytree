@@ -1,0 +1,32 @@
+<div>
+    <h1>Add a new transaction</h1>
+    <form [formGroup]="form" (ngSubmit)="submitTransaction()">
+        <table>
+            <tbody>
+                <tr>
+                    <td><label for="category">Category: </label></td>
+                    <td><select name="" id="" formControlName="category">
+                        <option value="transport">Transport</option>
+                        <option value="food">Food</option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td><label for="description">Description: </label></td>
+                    <td><input type="text" formControlName="description"></td>
+                </tr>
+                <tr>
+                    <td><label for="amount">Amount: </label></td>
+                    <td><input type="number" formArrayName="amount" formControlName="amount"></td>
+                </tr>
+                <tr>
+                    <td><label for="picture">Upload Picture: </label></td>
+                    <td><input type="file" formControlName="picture" #toUpload></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button type="submit" [disabled]="form.invalid">Submit</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
