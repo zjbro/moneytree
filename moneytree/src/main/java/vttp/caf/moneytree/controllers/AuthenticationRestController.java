@@ -3,10 +3,12 @@ package vttp.caf.moneytree.controllers;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonObjectBuilder;
 import vttp.caf.moneytree.payload.request.LoginRequest;
 import vttp.caf.moneytree.payload.request.SignupRequest;
 import vttp.caf.moneytree.payload.response.MessageResponse;
@@ -29,7 +34,8 @@ import vttp.caf.moneytree.security.services.UserDetailsImpl;
 import vttp.caf.moneytree.services.UserService;
 
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+// @CrossOrigin(origins = "*", maxAge = 3600)
+// @CrossOrigin(origins = "http://localhost:8080", maxAge = 3600, allowCredentials = "true")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthenticationRestController {
@@ -48,8 +54,11 @@ public class AuthenticationRestController {
   @PostMapping("/signin")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
+    String username = loginRequest.getUsername();
+    String password = loginRequest.getPassword();
+
     Authentication authentication = authenticationManager
-        .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+        .authenticate(new UsernamePasswordAuthenticationToken(username, password));
 
     SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -84,8 +93,9 @@ public class AuthenticationRestController {
   }
 
   @PostMapping("/signout")
-  public ResponseEntity<?> logoutUser() {
+  public ResponseEntity<?> logoutUser(HttpSession sess) {
     ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
+    sess.invalidate();
     return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
         .body(new MessageResponse("You've been signed out!"));
   }

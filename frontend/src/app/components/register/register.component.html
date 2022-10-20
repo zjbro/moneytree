@@ -1,1 +1,130 @@
-<p>register works!</p>
+      <!-- <form
+        *ngIf="!isSuccessful"
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+      >
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            name="username"
+            [(ngModel)]="form.username"
+            required
+            minlength="3"
+            maxlength="20"
+            #username="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+          />
+          <div class="invalid-feedback" *ngIf="username.errors && f.submitted">
+            <div *ngIf="username.errors['required']">Username is required</div>
+            <div *ngIf="username.errors['minlength']">
+              Username must be at least 3 characters
+            </div>
+            <div *ngIf="username.errors['maxlength']">
+              Username must be at most 20 characters
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            [(ngModel)]="form.email"
+            required
+            email
+            #email="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
+          />
+          <div class="invalid-feedback" *ngIf="email.errors && f.submitted">
+            <div *ngIf="email.errors['required']">Email is required</div>
+            <div *ngIf="email.errors['email']">
+              Email must be a valid email address
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            [(ngModel)]="form.password"
+            required
+            minlength="6"
+            #password="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+          />
+          <div class="invalid-feedback" *ngIf="password.errors && f.submitted">
+            <div *ngIf="password.errors['required']">Password is required</div>
+            <div *ngIf="password.errors['minlength']">
+              Password must be at least 6 characters
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary btn-block">Sign Up</button>
+        </div>
+  
+        <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+          Signup failed!<br />{{ errorMessage }}
+        </div>
+      </form>
+  
+      <div class="alert alert-success" *ngIf="isSuccessful">
+        Your registration is successful!
+      </div>
+    </div>
+  </div> -->
+
+
+  <form *ngIf="!isSuccessful" [formGroup]="form" (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
+    <mat-card>
+      <mat-card-title class="center">Register</mat-card-title>
+      <mat-card-content>
+
+        <div class="form-group">
+          <mat-form-field appearance="fill">
+              <mat-label>Username</mat-label>
+              <input type="text" placeholder="enter username here" matInput formControlName="username">
+              <mat-hint>Username must be between 3 and 20 characters</mat-hint>
+          </mat-form-field>
+      </div>
+      
+      <div class="form-group">
+          <mat-form-field appearance="fill">
+              <mat-label>Enter your password</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+              <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-hint>Password must be at least 6 characters</mat-hint>
+          </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <button class="block background-mint" mat-raised-button [disabled]="form.invalid">
+          Sign up
+        </button>
+      </div>
+      </mat-card-content>
+
+      <mat-card-actions> 
+        <div class="form-group">
+          <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-danger" role="alert">
+            Signup failed!<br/> {{ errorMessage }}
+          </div>
+        </div>
+      </mat-card-actions>
+    </mat-card>     
+    </form>
+
+    <mat-card *ngIf="isSuccessful">
+      <div class="alert alert-success">
+        Your registration is successful!
+      </div>
+    </mat-card>

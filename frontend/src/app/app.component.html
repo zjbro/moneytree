@@ -1,9 +1,49 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="isLoggedIn">
-    <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="/">Home</a>
-        <a class="nav-item nav-link" (click)="logout()">Logout</a>
-    </div>
-</nav>
+<div id="app">
+    <nav class="navbar navbar-expand navbar-custom navbar-light">
+      <a class="navbar-brand">MoneyTree</a>
+      <ul class="navbar-nav mr-auto" routerLinkActive="active">
+        <li class="nav-item">
+          <a href="/home" class="nav-link" routerLink="home" *ngIf="!isLoggedIn">Home </a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a href="/addtransaction" class="nav-link" routerLink="addtransaction">Add new transaction</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a href="/transactionlist" class="nav-link" [routerLink]="['/transactionlist', username]">View List</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
+        </li> -->
+      </ul>
+  
+      <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+        <li class="nav-item">
+          <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+        </li>
+        <li class="nav-item">
+          <a href="/login" class="nav-link" routerLink="login">Login</a>
+        </li>
+      </ul>
+  
+      <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+        <li class="nav-item">
+          <a class="nav-link">Welcome back, {{ username }}!</a>
+        </li>
+        <li class="nav-item">
+          <a href class="nav-link" (click)="logout()" routerLink="home">Logout</a>
+        </li>
+      </ul>
+
+        <ul class="navbar-nav d-flex flex-row">
+          <!-- Icons -->
+          <li class="nav-item me-3 me-lg-0">
+            <a class="nav-link" href="https://github.com/zjbro/moneytree" rel="nofollow" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+        </ul>    
+  </nav>
+
 
 <div class="center">
     <router-outlet></router-outlet>

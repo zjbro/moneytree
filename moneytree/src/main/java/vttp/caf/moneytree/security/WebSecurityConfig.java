@@ -12,6 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.session.SessionManagementFilter;
 
 import vttp.caf.moneytree.security.jwt.AuthEntryPointJwt;
 import vttp.caf.moneytree.security.jwt.AuthTokenFilter;
@@ -52,9 +53,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     return new BCryptPasswordEncoder();
   }
 
+  @Bean
+  CORSFilter corsFilter() {
+      CORSFilter filter = new CORSFilter();
+      return filter;
+    }
+
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.cors().and().csrf().disable()
+    http
+      .addFilterBefore(corsFilter(), SessionManagementFilter.class) //adds your custom CorsFilter
+      // .cors().and()
+      .csrf().disable()
       .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
       .authorizeRequests().antMatchers("/api/auth/**").permitAll()

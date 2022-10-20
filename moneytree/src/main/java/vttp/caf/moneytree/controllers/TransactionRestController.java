@@ -2,6 +2,8 @@ package vttp.caf.moneytree.controllers;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,11 +28,11 @@ public class TransactionRestController {
         @RequestPart String category,
         @RequestPart(required = false) String description,
         @RequestPart(required = false) MultipartFile picture,
-        // @RequestPart(required = false) String username,
-        @RequestPart String amount
+        @RequestPart String amount,
+        HttpSession sess
     ) throws IOException{
 
-        String username = "fred";
+        String username = (String)sess.getAttribute("username");
         Transaction tx = new Transaction();
         if(description!=null && picture!=null){
             tx = Transaction.create(category, description, picture, amount, username);

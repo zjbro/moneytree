@@ -1,4 +1,4 @@
-export interface Transaction {
+export interface User {
     username: string,
     password: string
 }

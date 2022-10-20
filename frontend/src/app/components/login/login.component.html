@@ -1,13 +1,16 @@
-<h1 class="center">Money Tree</h1>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="container modal-content">
-        <div>
+    <form *ngIf="!isLoggedIn" [formGroup]="form" (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
+      <mat-card>
+        <mat-card-title class="center">Login</mat-card-title>
+        <mat-card-content>
+
+          <div class="form-group">
             <mat-form-field appearance="fill">
                 <mat-label>Username</mat-label>
                 <input type="text" placeholder="enter username here" matInput formControlName="username">
             </mat-form-field>
         </div>
         
-        <div>
+        <div class="form-group">
             <mat-form-field appearance="fill">
                 <mat-label>Enter your password</mat-label>
                 <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
@@ -16,20 +19,26 @@
                 </button>
             </mat-form-field>
         </div>
-        
-      
-        <div>
-          <button style="float: right" class="block" type="submit" mat-raised-button color="primary" [disabled]="form.invalid">
+
+        <div class="form-group">
+          <button class="block background-mint" mat-raised-button [disabled]="form.invalid">
             Login
           </button>
         </div>
-        <br>
-        <br>
-        <div>
-          <h6>New to MoneyTree? Click here to register!</h6>
-        </div>
+        </mat-card-content>
 
+        <mat-card-actions> 
+          <div class="form-group">
+            <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger" role="alert">
+              Login failed: {{ errorMessage }}
+            </div>
+          </div>
+        </mat-card-actions>
+      </mat-card>     
       </form>
 
-
-
+      <mat-card *ngIf="isLoggedIn">
+        <div class="alert alert-success">
+          Logged in as {{ username }}.
+        </div>
+      </mat-card>

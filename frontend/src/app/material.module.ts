@@ -8,11 +8,12 @@ import {  MatSelectModule} from '@angular/material/select'
 import {  MatSidenavModule } from '@angular/material/sidenav'
 import {  MatMenuModule } from '@angular/material/menu'
 import {  MatListModule } from '@angular/material/list'
+import { MatCardModule } from '@angular/material/card'
 
 const matModules: any[] = [
   MatToolbarModule, MatButtonModule, MatListModule,
   MatIconModule, MatInputModule, MatFormFieldModule,
-  MatSelectModule, MatSidenavModule, MatMenuModule
+  MatSelectModule, MatSidenavModule, MatMenuModule, MatCardModule
 ]
 
 @NgModule({
