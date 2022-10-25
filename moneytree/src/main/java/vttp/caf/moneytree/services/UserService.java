@@ -3,13 +3,13 @@ package vttp.caf.moneytree.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import vttp.caf.moneytree.repositories.UserRepository;
+import vttp.caf.moneytree.repositories.UsersRepository;
 
 @Service
 public class UserService {
 
     @Autowired
-    private UserRepository userRepo;
+    private UsersRepository userRepo;
 
     public boolean authenticate(String username, String password) {
         return 1 == userRepo.countUsersByUsernameAndPassword(username, password);

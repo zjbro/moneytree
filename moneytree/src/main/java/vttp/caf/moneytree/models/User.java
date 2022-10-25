@@ -48,7 +48,6 @@ public class User {
   @Size(max = 20)
   private String username;
 
-  @NotBlank
   @Size(max = 50)
   @Email
   private String email;
@@ -81,6 +80,7 @@ public class User {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
+        
         return user;
     }
 

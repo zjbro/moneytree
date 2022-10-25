@@ -53,20 +53,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     return new BCryptPasswordEncoder();
   }
 
-  @Bean
-  CORSFilter corsFilter() {
-      CORSFilter filter = new CORSFilter();
-      return filter;
-    }
+  // @Bean
+  // CORSFilter corsFilter() {
+  //     CORSFilter filter = new CORSFilter();
+  //     return filter;
+  //   }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http
-      .addFilterBefore(corsFilter(), SessionManagementFilter.class) //adds your custom CorsFilter
-      // .cors().and()
+      // .addFilterBefore(corsFilter(), SessionManagementFilter.class) //adds your custom CorsFilter
+      .cors().and()
       .csrf().disable()
       .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-      .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+      .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() 
       .authorizeRequests().antMatchers("/api/auth/**").permitAll()
       .antMatchers("/api/test/**").permitAll()
       .anyRequest().authenticated();

@@ -15,8 +15,13 @@ public interface Queries {
         "insert into users (username, password) values (?, ?)";
 
     public static final String SQL_INSERT_NEW_TRANSACTION =
-        "insert into moneyflow (category, description, picture, amount, username) values (?, ?, ?, ?, ?)";
+        "insert into transactions (category, description, picture, amount, user_id, date_added) values (?, ?, ?, ?, ?, ?)";
 
-    public static final String SQL_SELECT_ALL_TRANSACTION_FROM_USERNAME =
-        "select * from moneyflow where username = ?";
+    public static final String SQL_SELECT_ALL_FROM_TRANSACTIONS_BY_USER_ID =
+        "select * from transactions where user_id = ?";
+
+    public static final String SQL_GET_USER_ID_FROM_USERNAME =
+        "select * from users where username = ?";
+
+
 }

@@ -12,7 +12,7 @@ import static vttp.caf.moneytree.repositories.Queries.*;
 import java.util.Optional;
 
 @Repository
-public class UserRepository {
+public class UsersRepository {
 
     @Autowired
     private JdbcTemplate template;
