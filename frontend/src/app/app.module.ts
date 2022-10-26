@@ -10,9 +10,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { httpInterceptorProviders } from './_helper/http.interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
-import { AddtransactionComponent } from './components/addtransaction/addtransaction.component';
 import { TransactionlistComponent } from './components/transactionlist/transactionlist.component';
 import { HomeComponent } from './components/home/home.component';
+import { AddtransactionComponent } from './components/addtransaction/addtransaction.component';
 
 
 const appRoutes: Routes = [

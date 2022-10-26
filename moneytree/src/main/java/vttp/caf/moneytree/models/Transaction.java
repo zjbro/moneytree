@@ -122,9 +122,10 @@ public class Transaction {
 
     public JsonObject toJson(){
         return Json.createObjectBuilder()
+        .add("transactionId", transactionId)
         .add("category", category)
         .add("description", (description == null) ? "" : description)
-        .add("picture", (Base64.getEncoder().encodeToString(picture) == null) ? "" : Base64.getEncoder().encodeToString(picture) )
+        .add("picture", (picture == null) ? "" : Base64.getEncoder().encodeToString(picture) )
         .add("amount", (amount == null) ? "" : amount)
         .add("date", date)
         .build();

@@ -23,5 +23,9 @@ public class TransactionService {
         return tRepo.getTransactionsByUsername(username);
 
     }
+
+    public void deleteTransaction(String transactionId){
+        tRepo.deleteTransaction(transactionId);
+    }
     
 }

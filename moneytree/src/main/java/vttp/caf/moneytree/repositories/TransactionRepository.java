@@ -34,10 +34,15 @@ public class TransactionRepository {
         SqlRowSet rs = template.queryForRowSet(SQL_GET_USER_ID_FROM_USERNAME, username);
         while(rs.next()){
             userId = rs.getInt("id");
+            
         }
         transactions = template.query(SQL_SELECT_ALL_FROM_TRANSACTIONS_BY_USER_ID, Transaction.rowMapper, userId);
         
         return transactions;
+    }
+
+    public void deleteTransaction(String transactionId){
+        template.update(SQL_DELETE_TRANSACTION_FROM_TRANSACTIONID, transactionId);
     }
 
 }

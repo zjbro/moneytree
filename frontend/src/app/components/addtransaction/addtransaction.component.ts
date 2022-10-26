@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Transaction } from 'src/app/_models/transaction.model';
+import { StorageService } from 'src/app/_services/storage.service';
 import { TransactionService } from 'src/app/_services/transaction.service';
 
 @Component({
@@ -12,15 +13,22 @@ import { TransactionService } from 'src/app/_services/transaction.service';
 export class AddtransactionComponent implements OnInit {
 
   form!: FormGroup
+  username!: string
+  isLoggedIn = false;
+  isSubmitted = false;
 
   @ViewChild('toUpload')
-  toUpload!: ElementRef
-
+  toUpload!: ElementRef  
   
-  
-  constructor(private fb: FormBuilder, private txService: TransactionService, private router: Router) { }
+  constructor(private fb: FormBuilder, private txService: TransactionService, private storageService: StorageService) { }
 
   ngOnInit(): void {
+    this.form = this.createForm()
+    this.isLoggedIn = this.storageService.isLoggedIn();
+    if (this.isLoggedIn) {
+      const user = this.storageService.getUser();
+      this.username = user.username;
+    }
     this.form = this.createForm()
   }
 
@@ -29,8 +37,10 @@ export class AddtransactionComponent implements OnInit {
       category: this.fb.control<string>('', [Validators.required]),
       description: this.fb.control<string>(''),
       picture: this.fb.control<any>(''),
-      amount: this.fb.control<number>(0, [ Validators.required ])
+      amount: this.fb.control<number>(0,[ Validators.required ]),
+      date: [new Date(), Validators.required]
     })
+    
   }
 
   submitTransaction(){
@@ -39,7 +49,12 @@ export class AddtransactionComponent implements OnInit {
     let tx: Transaction = this.form.value as Transaction
     console.log('>>tx to upload: ', tx)
     this.txService.uploadTransaction(tx, myFile)
-    this.router.navigate([''])
+    this.isSubmitted = true;
   }
+
+  reloadPage(): void {
+    window.location.reload();
+  }
+ 
 
 }

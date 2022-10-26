@@ -1,32 +1,78 @@
-<div>
-    <h1>Add a new transaction</h1>
-    <form [formGroup]="form" (ngSubmit)="submitTransaction()">
-        <table>
-            <tbody>
-                <tr>
-                    <td><label for="category">Category: </label></td>
-                    <td><select name="" id="" formControlName="category">
-                        <option value="transport">Transport</option>
-                        <option value="food">Food</option>
-                    </select></td>
-                </tr>
-                <tr>
-                    <td><label for="description">Description: </label></td>
-                    <td><input type="text" formControlName="description"></td>
-                </tr>
-                <tr>
-                    <td><label for="amount">Amount: </label></td>
-                    <td><input type="number" formArrayName="amount" formControlName="amount"></td>
-                </tr>
-                <tr>
-                    <td><label for="picture">Upload Picture: </label></td>
-                    <td><input type="file" formControlName="picture" #toUpload></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><button type="submit" [disabled]="form.invalid">Submit</button></td>
-                </tr>
-            </tbody>
-        </table>
+<form [formGroup]="form" *ngIf="!isSubmitted">
+    <mat-card>
+      <mat-card-title class="center">Add a new transaction</mat-card-title>
+      <mat-card-content>
+        
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Category</mat-label>
+                <mat-select formControlName="category">
+                  <mat-option value="food">Food</mat-option>
+                  <mat-option value="transport">Transport</mat-option>
+                  <mat-option value="entertainment">Entertainment</mat-option>
+                  <mat-option value="household">Household</mat-option>
+                  <mat-option value="bill">Bill</mat-option>
+                  <mat-option value="shopping">Shopping</mat-option>
+                  <mat-option value="gift">Gift</mat-option>
+                  <mat-option value="mahjong">Mahjong</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+          
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Description</mat-label>
+                <input matInput type="text" formControlName="description">
+            </mat-form-field>
+        </div>
+          
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Amount</mat-label>
+                <input matInput type="number" formControlName="amount">
+            </mat-form-field>
+        </div>
+      
+        
+        <div>
+            <input type="file" formControlName="picture" #toUpload>
+        </div>
+
+        &nbsp;
+
+        <div>
+            <mat-form-field appearance="fill" class="example-form-field">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="datepicker" formControlName="date">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                <mat-datepicker #datepicker>
+                  <mat-datepicker-actions>
+                    <button mat-button matDatepickerCancel>Cancel</button>
+                    <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                  </mat-datepicker-actions>
+                </mat-datepicker>
+              </mat-form-field>
+        </div>
+
+      </mat-card-content>
+
+      <mat-card-actions> 
+        <button class="block background-mint" mat-raised-button type="button" [disabled]="form.invalid" (click)="submitTransaction()">
+            Submit
+          </button>
+      </mat-card-actions>
+    </mat-card>     
     </form>
-</div>
+
+    <mat-card *ngIf="isSubmitted">
+        <mat-card-title>Transaction has been created!</mat-card-title>
+        <mat-card-actions class="center">
+            <button mat-flat-button class="button-mint" (click)="reloadPage()">Add another</button>
+            &nbsp;
+            <button mat-flat-button class="button-mint" [routerLink]="['/transactionlist', username]">View history</button>
+        </mat-card-actions>
+    </mat-card>
+
+

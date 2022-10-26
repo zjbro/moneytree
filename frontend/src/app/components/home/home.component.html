@@ -1,8 +1,17 @@
-<mat-card class="background-mint">
+<mat-card class="background-mint" *ngIf="!isLoggedIn">
     <mat-card-title>Welcome to MoneyTree</mat-card-title>
     <mat-card-actions class="center">
         <button mat-flat-button class="button-mint" routerLink="login">Login</button>
         &nbsp;
         <button mat-flat-button class="button-mint" routerLink="register">Register</button>
+    </mat-card-actions>
+</mat-card>
+
+<mat-card class="background-mint" *ngIf="isLoggedIn">
+    <mat-card-title>What would you like to do today?</mat-card-title>
+    <mat-card-actions class="center">
+        <button mat-flat-button class="button-mint" routerLink="addtransaction">Add new transaction</button>
+        &nbsp;
+        <button mat-flat-button class="button-mint" [routerLink]="['/transactionlist', username]">View list</button>
     </mat-card-actions>
 </mat-card>

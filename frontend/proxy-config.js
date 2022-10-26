@@ -1,5 +1,5 @@
 module.exports = [ 
-    { context: ['/api/auth/signin'],
+    { context: ['/**'],
     target: 'http://localhost:8080',
     secure: false
     }

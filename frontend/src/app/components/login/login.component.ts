@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
     this.form = this.createForm()
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
+      this.roles = this.storageService.getUser().roles;
       this.username = this.storageService.getUser().username;
     }
   }
@@ -45,10 +46,11 @@ export class LoginComponent implements OnInit {
         this.storageService.saveUser(data);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
+        this.roles = this.storageService.getUser().roles;
         this.reloadPage();
       },
       error: err => {
-        this.errorMessage = err.error;
+        this.errorMessage = err.error.message;
         this.isLoginFailed = true;
       }
     });

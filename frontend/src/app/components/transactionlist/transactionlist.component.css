@@ -1,0 +1,38 @@
+.imgLink { 
+    border: none;
+    background: none;
+}
+
+  table {
+    width: 100%;
+  }
+  
+  .mat-column-date {
+    width: 150px;
+    max-width: 150px;
+  }
+
+  .mat-column-category {
+    width: 150px;
+    max-width: 150px;
+  }
+
+  .mat-column-description {
+    word-wrap: break-word;
+  white-space: unset;
+  width: 200px;
+  max-width: 200px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  }
+  
+
+
+
