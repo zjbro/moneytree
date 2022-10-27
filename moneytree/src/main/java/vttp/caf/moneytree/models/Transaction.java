@@ -5,13 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Base64;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;

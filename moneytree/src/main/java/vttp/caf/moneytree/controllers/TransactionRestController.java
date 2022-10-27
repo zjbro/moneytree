@@ -41,10 +41,10 @@ public class TransactionRestController {
         @RequestPart(required = false) MultipartFile picture,
         @RequestPart String amount,
         @RequestPart String date,
-        HttpSession sess
+        @RequestPart String username
     ) throws IOException{
 
-        String username = (String)sess.getAttribute("username");
+        // String username = (String)sess.getAttribute("username");
         Transaction tx = new Transaction();
         if(description!=null && picture!=null){
             tx = Transaction.create(category, description, picture, amount, username, date);
