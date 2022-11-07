@@ -1,21 +1,3 @@
-<!-- <table>
-    <tr>
-        <th>Date</th>
-        <th>Category</th>
-        <th>Description</th>
-        <th>Picture</th>
-        <th>Amount</th>
-    </tr>
-    <tr *ngFor="let transaction of transactions">
-        <td>{{ transaction.date }}</td>
-        <td>{{ transaction.category }}</td>
-        <td>{{ transaction.description }}</td>
-        <td class="imgLink"><img src="{{'data:image/jpg;base64,'+ transaction.picture }}" onerror="this.onerror=null; this.remove();"></td>
-        <td>{{ transaction.amount }}</td>
-    </tr>
-</table> -->
-
-
 <div>
 
   <mat-form-field appearance="standard">
@@ -23,7 +5,7 @@
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
   </mat-form-field>
 
-  <table mat-table [dataSource]="dataSource" matSort>
+  <table mat-table [dataSource]="dataSource" matSort (contentChanged)="onContentChange($event)">
 
 
     <!-- Position Column -->
@@ -31,7 +13,7 @@
       <mat-header-cell mat-sort-header *matHeaderCellDef>
         Date
       </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element.date  | date: "dd MMM yyyy, hh:mm:ss" }} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{ element.date  | date: "dd MMM yyyy, HH:mm" }} </mat-cell>
     </ng-container>
 
     <!-- Name Column -->
@@ -81,10 +63,92 @@
         Actions
       </mat-header-cell>
       <mat-cell *matCellDef="let element; let i = index">
-        <button mat-icon-button matTooltip="Click to Edit" class="iconbutton" color="primary">
+        <button mat-icon-button matTooltip="Click to Edit" class="iconbutton" color="primary" (click)="openModal(i)">
           <mat-icon aria-label="Edit">edit</mat-icon>
         </button>
-        <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn" (click)="removeTransaction(i)">
+        <app-modal id=returnCurrentIndex>
+
+          
+          
+          <form [formGroup]="form" *ngIf="!isSubmitted">
+            <mat-card>
+              <mat-card-title class="center">Edit a transaction</mat-card-title>
+              <mat-card-content>
+                
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Category</mat-label>
+                        <mat-select formControlName="category">
+                          <mat-option value="Food">Food</mat-option>
+                          <mat-option value="Transport">Transport</mat-option>
+                          <mat-option value="Entertainment">Entertainment</mat-option>
+                          <mat-option value="Household">Household</mat-option>
+                          <mat-option value="Bill">Bill</mat-option>
+                          <mat-option value="Shopping">Shopping</mat-option>
+                          <mat-option value="Gift">Gift</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                  
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Description</mat-label>
+                        <input matInput type="text" formControlName="description">
+                    </mat-form-field>
+                </div>
+                  
+        
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Amount</mat-label>
+                        <input matInput type="number" formControlName="amount" value="{{element.amount}}">
+                    </mat-form-field>
+                </div>
+              
+                
+                <div>
+                    <input type="file" formControlName="picture" #toUpload>
+                </div>
+        
+                &nbsp;
+        
+                <div>
+                    <mat-form-field appearance="fill" class="example-form-field">
+                        <mat-label>Choose a date</mat-label>
+                        <input matInput [matDatepicker]="datepicker" formControlName="date" value="{{element.date}}">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #datepicker>
+                          <mat-datepicker-actions>
+                            <button mat-button matDatepickerCancel>Cancel</button>
+                            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                          </mat-datepicker-actions>
+                        </mat-datepicker>
+                      </mat-form-field>
+                </div>
+        
+              </mat-card-content>
+        
+              <mat-card-actions> 
+                <button class="block background-mint" mat-raised-button type="button" [disabled]="form.invalid" (click)="updateTransaction(i)">
+                    Submit
+                  </button>
+              </mat-card-actions>
+            </mat-card>     
+            </form>
+        
+            <mat-card *ngIf="isSubmitted">
+                <mat-card-title>Transaction has been updated!</mat-card-title>
+            </mat-card>
+            <button (click)="closeModal(i);">Close</button>
+          
+          
+          <script>
+            document.getElementById("returnCurrentIndex").innerHTML = returnCurrentIndex(i);
+            </script>
+        </app-modal>
+
+        <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn" (click)="removeTransaction(i);">
           <mat-icon aria-label="Delete">delete</mat-icon>
           <!-- <input type="hidden" id="transactionId" name="transactionId" value="{{ element.transactionId }}"> -->
         </button>
@@ -102,3 +166,6 @@
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of transaction"></mat-paginator>
 </div>
+
+
+

@@ -37,8 +37,8 @@ import vttp.caf.moneytree.security.services.UserDetailsImpl;
 import vttp.caf.moneytree.services.UserService;
 
 
-// @CrossOrigin(origins = "*", maxAge = 3600)
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
+
+@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600, allowCredentials = "true")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthenticationRestController {
@@ -91,24 +91,6 @@ public class AuthenticationRestController {
                                    userDetails.getEmail(),
                                    roles));
   }
-
-  // @PostMapping("/signup")
-  // public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-  //   if (userService.checkIfUserExist(signUpRequest.getUsername())) {
-  //     return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
-  //   }
-  
-  //   // Create new user's account    
-  //   boolean added = userService.addUser(signUpRequest.getUsername(),
-  //       encoder.encode(signUpRequest.getPassword()));
-  //   if(added){
-  //       return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-  //   }
-  //   else {
-  //       return ResponseEntity.ok(new MessageResponse("Username already exists, please try again!"));
-  //   }
-    
-  // }
   
   @PostMapping("/signup")
   public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
@@ -166,4 +148,6 @@ public class AuthenticationRestController {
     return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
         .body(new MessageResponse("You've been signed out!"));
   }
+
+  
 }

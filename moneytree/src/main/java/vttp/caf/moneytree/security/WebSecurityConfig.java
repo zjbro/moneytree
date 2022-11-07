@@ -67,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       .csrf().disable()
       .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() 
-      .authorizeRequests().antMatchers("/api/auth/**").permitAll()
+      .authorizeRequests().antMatchers("/api/auth/**","/","/assets/**","/runtime.dc5385b747a5b253.js","/polyfills.5fd626fde791e8c3.js","/main.9a05ca1d40d8b6a1.js","/styles.6f40f3f134213ff1.css","/favicon.ico","/styles.css").permitAll()
       .antMatchers("/api/test/**").permitAll()
       .anyRequest().authenticated();
 

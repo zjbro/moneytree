@@ -80,39 +80,43 @@ public class Transaction {
     };
 
 
-    public static Transaction create (String category, String description, MultipartFile picture, String amount, String username, String date) throws IOException {
+    public static Transaction create (String category, String description, MultipartFile picture, String amount, Integer transactionId, String date) throws IOException {
         Transaction t = new Transaction();
         t.setCategory(category);
         t.setDescription(description);
         t.setAmount(amount);
         t.setPicture(picture.getBytes());
         t.setDate(date);
+        t.setTransactionId(transactionId);
         return t;
     }
 
-    public static Transaction create (String category, String description, String amount, String username, String date) throws IOException {
+    public static Transaction create (String category, String description, String amount, Integer transactionId, String date) throws IOException {
         Transaction t = new Transaction();
         t.setCategory(category);
         t.setDescription(description);
         t.setAmount(amount);
         t.setDate(date);
+        t.setTransactionId(transactionId);
         return t;
     }
 
-    public static Transaction create (String category, MultipartFile picture, String amount, String username, String date) throws IOException {
+    public static Transaction create (String category, MultipartFile picture, String amount, Integer transactionId, String date) throws IOException {
         Transaction t = new Transaction();
         t.setCategory(category);
         t.setAmount(amount);
         t.setPicture(picture.getBytes());
         t.setDate(date);
+        t.setTransactionId(transactionId);
         return t;
     }
 
-    public static Transaction create (String category, String amount, String username, String date) throws IOException {
+    public static Transaction create (String category, String amount, Integer transactionId, String date) throws IOException {
         Transaction t = new Transaction();
         t.setCategory(category);
         t.setAmount(amount);
         t.setDate(date);
+        t.setTransactionId(transactionId);
         return t;
     }
 
@@ -137,6 +141,43 @@ public class Transaction {
     }
     public static void setRowMapper(RowMapper rowMapper) {
         Transaction.rowMapper = rowMapper;
+    }
+
+
+    public static Transaction create (String category, String description, MultipartFile picture, String amount, String date) throws IOException {
+        Transaction t = new Transaction();
+        t.setCategory(category);
+        t.setDescription(description);
+        t.setAmount(amount);
+        t.setPicture(picture.getBytes());
+        t.setDate(date);
+        return t;
+    }
+
+    public static Transaction create (String category, String description, String amount, String date) throws IOException {
+        Transaction t = new Transaction();
+        t.setCategory(category);
+        t.setDescription(description);
+        t.setAmount(amount);
+        t.setDate(date);
+        return t;
+    }
+
+    public static Transaction create (String category, MultipartFile picture, String amount, String date) throws IOException {
+        Transaction t = new Transaction();
+        t.setCategory(category);
+        t.setAmount(amount);
+        t.setPicture(picture.getBytes());
+        t.setDate(date);
+        return t;
+    }
+
+    public static Transaction create (String category, String amount, String date) throws IOException {
+        Transaction t = new Transaction();
+        t.setCategory(category);
+        t.setAmount(amount);
+        t.setDate(date);
+        return t;
     }
     
     

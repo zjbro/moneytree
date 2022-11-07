@@ -4,5 +4,6 @@ export interface Transaction {
     description: string,
     picture: Blob,
     amount: string,
-    date: string
+    date: string,
+    username: string
 }

@@ -7,14 +7,13 @@
             <mat-form-field appearance="fill">
                 <mat-label>Category</mat-label>
                 <mat-select formControlName="category">
-                  <mat-option value="food">Food</mat-option>
-                  <mat-option value="transport">Transport</mat-option>
-                  <mat-option value="entertainment">Entertainment</mat-option>
-                  <mat-option value="household">Household</mat-option>
-                  <mat-option value="bill">Bill</mat-option>
-                  <mat-option value="shopping">Shopping</mat-option>
-                  <mat-option value="gift">Gift</mat-option>
-                  <mat-option value="mahjong">Mahjong</mat-option>
+                  <mat-option value="Food">Food</mat-option>
+                  <mat-option value="Transport">Transport</mat-option>
+                  <mat-option value="Entertainment">Entertainment</mat-option>
+                  <mat-option value="Household">Household</mat-option>
+                  <mat-option value="Bill">Bill</mat-option>
+                  <mat-option value="Shopping">Shopping</mat-option>
+                  <mat-option value="Gift">Gift</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -73,6 +72,9 @@
             &nbsp;
             <button mat-flat-button class="button-mint" [routerLink]="['/transactionlist', username]">View history</button>
         </mat-card-actions>
+        <mat-card-footer>
+          <h5><em>{{catFact}}</em></h5>
+        </mat-card-footer>
     </mat-card>
 
 

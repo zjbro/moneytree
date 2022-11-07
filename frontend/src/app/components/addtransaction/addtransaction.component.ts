@@ -1,6 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Transaction } from 'src/app/_models/transaction.model';
 import { StorageService } from 'src/app/_services/storage.service';
 import { TransactionService } from 'src/app/_services/transaction.service';
@@ -16,6 +16,7 @@ export class AddtransactionComponent implements OnInit {
   username!: string
   isLoggedIn = false;
   isSubmitted = false;
+  catFact!: string
 
   @ViewChild('toUpload')
   toUpload!: ElementRef  
@@ -23,13 +24,20 @@ export class AddtransactionComponent implements OnInit {
   constructor(private fb: FormBuilder, private txService: TransactionService, private storageService: StorageService) { }
 
   ngOnInit(): void {
-    this.form = this.createForm()
     this.isLoggedIn = this.storageService.isLoggedIn();
     if (this.isLoggedIn) {
       const user = this.storageService.getUser();
       this.username = user.username;
     }
     this.form = this.createForm()
+    this.txService.getRandomCatFact()
+      .then(result => {
+        console.log(">>>result from catfact: ", result)
+        this.catFact = result.catFact
+        console.log('>>>catfact: ', this.catFact)
+      }).catch((error: HttpErrorResponse) => {
+        console.error(">>>>error: ", error)
+      })
   }
 
   createForm(){
@@ -38,7 +46,8 @@ export class AddtransactionComponent implements OnInit {
       description: this.fb.control<string>(''),
       picture: this.fb.control<any>(''),
       amount: this.fb.control<number>(0,[ Validators.required ]),
-      date: [new Date(), Validators.required]
+      date: [new Date(), Validators.required],
+      username: this.username
     })
     
   }

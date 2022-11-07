@@ -13,6 +13,8 @@ import { LoginComponent } from './components/login/login.component';
 import { TransactionlistComponent } from './components/transactionlist/transactionlist.component';
 import { HomeComponent } from './components/home/home.component';
 import { AddtransactionComponent } from './components/addtransaction/addtransaction.component';
+import { ModalModule } from './_modals/modal.module';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 const appRoutes: Routes = [
@@ -21,6 +23,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'addtransaction', component: AddtransactionComponent },
   { path: 'transactionlist/:username', component: TransactionlistComponent},
+  { path: 'profile', component: ProfileComponent},
   { path: '**', redirectTo: '/', pathMatch: 'full'}
 ]
 
@@ -31,7 +34,8 @@ const appRoutes: Routes = [
     TransactionlistComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,8 +44,8 @@ const appRoutes: Routes = [
     HttpClientModule,
     MaterialModule,
     BrowserAnimationsModule,
-    FormsModule
-    
+    FormsModule,
+    ModalModule    
   ],
   providers: [ 
     TransactionService, 

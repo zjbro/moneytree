@@ -26,5 +26,17 @@ public interface Queries {
     public static final String SQL_DELETE_TRANSACTION_FROM_TRANSACTIONID = 
         "delete from transactions where transaction_id = ?";
 
+    public static final String SQL_UPDATE_TRASACTION =
+        "update transactions set category = ?, description = ?, picture = ?, amount = ?, user_id = ?,date_added = ? where transaction_id = ?";
+
+    public static final String SQL_DELETE_USER = 
+        "delete from users where id = ?";
+    
+    public static final String SQL_DELETE_TRANSACTIONS_BY_USERID = 
+        "delete from transactions where user_id = ?";
+
+    public static final String SQL_DELETE_USER_FROM_USER_ROLES = 
+        "delete from user_roles where user_id = ?";
+
 
 }

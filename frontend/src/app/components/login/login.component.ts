@@ -1,8 +1,10 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/_models/user.model';
 import { AuthService } from 'src/app/_services/auth.service';
 import { StorageService } from 'src/app/_services/storage.service';
+import { TransactionService } from 'src/app/_services/transaction.service';
 
 
 @Component({
@@ -18,8 +20,9 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
   hide = true;
+  
 
-  constructor(private authService: AuthService, private storageService: StorageService, private fb:FormBuilder) { }
+  constructor(private authService: AuthService, private storageService: StorageService, private fb:FormBuilder, private tService: TransactionService) { }
 
   ngOnInit(): void {
     this.form = this.createForm()
@@ -54,6 +57,7 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = true;
       }
     });
+
   }
 
   reloadPage(): void {
