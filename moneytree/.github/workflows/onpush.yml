@@ -1,24 +1,41 @@
-name: Deploy to Heroku
+name: Deploy to heroku
+
 on:
   push:
     branches:
-    - release  
+      - release
+
 jobs:
-  deploy_to_heroku:
+  build:
     runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout src
-        uses: actions/checkout@v2
 
-      - name: Deploy api to heroku
-        run: |
-          git subtree push --prefix server heroku main
+steps:
+  - uses: actions/checkout@v1
 
-      # - name: Deploy
-      #   uses: akhileshns/heroku-deploy@v3.12.12
-      #   with:
-      #     heroku_api_key: ${{  secrets.heroku_api_key  }}
-      #     heroku_app_name: "zjbro-moneytree"      
-      #     heroku_email: ${{ secrets.email }}
-      #     branch: ${{ github.ref_name }}
+  - name: Add api remote origin
+    run: |
+      git remote add heroku-api https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_SERVE_APP_NAME }}.git
+  - name: Deploy api to Heroku
+    run: |
+      git subtree push --prefix moneytree heroku-api master
+
+# name: Deploy to Heroku
+# on:
+#   push:
+#     branches:
+#     - release  
+# jobs:
+#   deploy_to_heroku:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout src
+#         uses: actions/checkout@v2
+#       - name: Deploy
+#         uses: akhileshns/heroku-deploy@v3.12.12
+#         with:
+#           heroku_api_key: ${{  secrets.heroku_api_key  }}
+#           heroku_app_name: "zjbro-moneytree"      
+#           heroku_email: ${{ secrets.email }}
+#           branch: ${{ github.ref_name }}
+
+
