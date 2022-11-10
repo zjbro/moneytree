@@ -6,6 +6,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -29,14 +32,17 @@ public class TransactionService {
         tRepo.addTransaction(tx, username);
     }
 
+    @Cacheable(value="transaction")
     public List<Transaction> getTransactions(String username) throws SQLException{
         return tRepo.getTransactionsByUsername(username);
     }
 
+    @CacheEvict(value="transaction", allEntries=true)
     public void deleteTransaction(String transactionId){
         tRepo.deleteTransaction(transactionId);
     }
 
+    @CacheEvict(value="transaction")
     public void updateTransaction(Transaction tx, String username){
         tRepo.updateTransaction(tx, username);
     }

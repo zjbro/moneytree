@@ -7,8 +7,6 @@
 
   <table mat-table [dataSource]="dataSource" matSort (contentChanged)="onContentChange($event)">
 
-
-    <!-- Position Column -->
     <ng-container matColumnDef="date">
       <mat-header-cell mat-sort-header *matHeaderCellDef>
         Date
@@ -16,7 +14,6 @@
       <mat-cell *matCellDef="let element"> {{ element.date  | date: "dd MMM yyyy, HH:mm" }} </mat-cell>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="category">
       <mat-header-cell mat-sort-header *matHeaderCellDef>
         Category
@@ -24,7 +21,6 @@
       <mat-cell *matCellDef="let element"> {{ element.category }} </mat-cell>
     </ng-container>
 
-    <!-- Weight Column -->
     <ng-container matColumnDef="description">
       <mat-header-cell mat-sort-header *matHeaderCellDef>
         Description
@@ -150,7 +146,6 @@
 
         <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn" (click)="removeTransaction(i);">
           <mat-icon aria-label="Delete">delete</mat-icon>
-          <!-- <input type="hidden" id="transactionId" name="transactionId" value="{{ element.transactionId }}"> -->
         </button>
       </mat-cell>
     </ng-container>

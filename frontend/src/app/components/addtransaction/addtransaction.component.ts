@@ -32,9 +32,7 @@ export class AddtransactionComponent implements OnInit {
     this.form = this.createForm()
     this.txService.getRandomCatFact()
       .then(result => {
-        console.log(">>>result from catfact: ", result)
         this.catFact = result.catFact
-        console.log('>>>catfact: ', this.catFact)
       }).catch((error: HttpErrorResponse) => {
         console.error(">>>>error: ", error)
       })

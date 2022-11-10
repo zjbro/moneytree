@@ -82,8 +82,6 @@ public class AuthenticationRestController {
 
     sess.setAttribute("username", username);
 
-    // return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-    //     .body(new UserInfoResponse(userDetails.getUsername()));
 
     return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
         .body(new UserInfoResponse(userDetails.getId(),

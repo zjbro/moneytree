@@ -61,7 +61,6 @@ export class TransactionlistComponent implements OnInit, OnDestroy {
     this.sub$ = this.transactionService.OnNewTransaction.subscribe()
     this.transactionService.getTransactionList(this.username)
     .then(result => {
-      console.log(">>>>Transactions from server: ", result)
       this.transactions = result
       this.tableData = this.transactions
       this.dataSource = new MatTableDataSource(this.transactions);
@@ -136,12 +135,10 @@ export class TransactionlistComponent implements OnInit, OnDestroy {
   }
 
   updateTransaction(i: number){
-    console.info('>>>submit: ', this.form.value)
     const myFile = this.toUpload.nativeElement.files[0]
     let tx: Transaction = this.form.value as Transaction
     this.innerIndexCalculated = this.startingIndexOfPage + i
     tx.transactionId = this.transactions[this.innerIndexCalculated].transactionId
-    console.log('>>tx to upload: ', tx)
     this.transactionService.updateTransaction(tx, myFile)
     this.isSubmitted = true;
     this.reloadPage();

@@ -17,9 +17,6 @@ export class ModalService {
     open(id: number) {
         // open modal specified by id
         const modal = this.modals[id];
-        console.log(">>>>modals: ",this.modals)
-        console.log(">>>>>id of modal: ", id)
-        console.log(">>>>modal: ",modal)
         modal.open();
     }
 

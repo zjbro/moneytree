@@ -11,9 +11,6 @@
         <li class="nav-item" *ngIf="isLoggedIn">
           <a href="/transactionlist" class="nav-link" [routerLink]="['/transactionlist', username]">View List</a>
         </li>
-        <!-- <li class="nav-item">
-          <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
-        </li> -->
       </ul>
   
       <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">

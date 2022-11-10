@@ -1,6 +1,7 @@
 package vttp.caf.moneytree.models;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Base64;
@@ -12,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 
-public class Transaction {
+public class Transaction implements Serializable{
 
     private Integer transactionId;
     private String category;
