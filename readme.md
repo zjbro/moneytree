@@ -4,8 +4,8 @@ An application developed as part of the requirements for NUS-ISS Profession Dipl
 
 ### Built With
 
-* [![Angular][Angular.io]][Angular-url]
-* [![Springboot][Spring.io/projects/spring-boot]][Springboot-url]
+* Angular
+* Spring Boot
 
 <!-- ABOUT -->
 ## ABOUT
